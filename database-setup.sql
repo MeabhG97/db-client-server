@@ -33,24 +33,24 @@ CREATE TABLE songs (
 
 INSERT INTO artists (artist_name, formed_date, origin, members)
 VALUES 
-  ('Nightwish', '1996-07-06', 'Kitee, Finland', 'Tuomas Holopainen, Emppu Vuorinen, Jukka Nevalainen, Tarja Turunen, Marco Hietala, Floor Jansen'),
-  ('Beast in Black', '2015-12-08', 'Helsinki, Finland', 'Anton Kabanen, Yannis Papadopoulos, Kasperi Heikkinen, Mate Molnar, Atte Palokangas'),
-  ('Apocalyptica', '1993-09-17', 'Helsinki, Finland', 'Eicca Toppinen, Perttu Kivilaakso, Paavo Lötjönen, Mikko Sirén');
+  ('Nightwish', '1996-07-06', 'Kitee,Finland', 'Tuomas Holopainen,Emppu Vuorinen,Jukka Nevalainen,Tarja Turunen,Marco Hietala,Floor Jansen'),
+  ('Beast in Black', '2015-12-08', 'Helsinki,Finland', 'Anton Kabanen,Yannis Papadopoulos,Kasperi Heikkinen,Mate Molnar,Atte Palokangas'),
+  ('Apocalyptica', '1993-09-17', 'Helsinki,Finland', 'Eicca Toppinen,Perttu Kivilaakso,Paavo Lötjönen,Mikko Sirén');
 
 INSERT INTO albums (album_name, artist_id, release_date, producer)
 VALUES 
   ('Angels Fall First', 1, '1997-11-01', 'Tuomas Holopainen'),
   ('Oceanborn', 1, '1998-12-07', 'Tero Kinnunen'),
-  ('Century Child', 1, '2002-04-22', 'Tero Kinnunen, Nightwish'),
-  ('Dark Passion Play', 1, '2007-09-26', 'Tuomas Holopainen, Tero Kinnunen'),
-  ('Endless Forms Most Beautiful', 1, '2015-03-27', 'Tuomas Holopainen, Tero Kinnunen'),
-  ('Berserker', 2, '2019-02-08', 'Anton Kabanen, Janne Björkroth'),
-  ('From Hell with Love', 2, '2019-02-08', 'Anton Kabanen, Janne Björkroth'),
+  ('Century Child', 1, '2002-04-22', 'Tero Kinnunen,Nightwish'),
+  ('Dark Passion Play', 1, '2007-09-26', 'Tuomas Holopainen,Tero Kinnunen'),
+  ('Endless Forms Most Beautiful', 1, '2015-03-27', 'Tuomas Holopainen,Tero Kinnunen'),
+  ('Berserker', 2, '2019-02-08', 'Anton Kabanen,Janne Björkroth'),
+  ('From Hell with Love', 2, '2019-02-08', 'Anton Kabanen,Janne Björkroth'),
   ('Amorphis Plays Metallica by Four Cellos', 3, '1996-12-11', 'Apocalyptica'),
-  ('Inquisition Symphony', 3, '1998-09-22', 'Himself'),
+  ('Inquisition Symphony', 3, '1998-09-22', 'Otto Donner,Hiili Hiilesmaa'),
   ('Cult', 3, '2000-10-02', 'Apocalyptica'),
-  ('Reflections', 3, '2003-10-15', 'Marti Frederiksen, Jacob Hellner'),
-  ('Worlds Collide', 3, '2007-09-14', 'Jacoby Shaddix, Johnny Andrews');
+  ('Reflections', 3, '2003-10-15', 'Marti Frederiksen,Jacob Hellner'),
+  ('Worlds Collide', 3, '2007-09-14', 'Jacoby Shaddix,Johnny Andrews');
 
 INSERT INTO songs (song_name, album_id, length)
 VALUES 
