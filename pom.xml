@@ -71,6 +71,11 @@
             <artifactId>checkstyle-rules</artifactId>
             <version>4.9.3</version>
           </dependency>
+          <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.32</version>
+          </dependency>
         </dependencies>
         <configuration>
           <configLocation>com/github/ngeor/checkstyle.xml</configLocation>
