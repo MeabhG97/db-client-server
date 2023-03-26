@@ -61,6 +61,20 @@ public class Artist {
         return members;
     }
 
+    public String getMembersAsString(){
+        String memberString = "";
+        for(String member : members){
+            if(memberString.length() == 0){
+                memberString += member;
+            }
+            else{
+                memberString += ",";
+                memberString += member;
+            }
+        }
+        return memberString;
+    }
+
     public void setMembers(List<String> members) {
         this.members = members;
     }
