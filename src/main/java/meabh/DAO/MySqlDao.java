@@ -3,9 +3,10 @@ package meabh.DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import meabh.Exceptions.DaoException;
 
 public class MySqlDao {
-    public Connection getConnection() {
+    public Connection getConnection() throws DaoException{
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/music";
         String user = "root";
@@ -26,7 +27,7 @@ public class MySqlDao {
         return connection;
     }
 
-    public void freeConnection(Connection connection){
+    public void freeConnection(Connection connection) throws DaoException{
         try{
             if(connection != null){
                 connection.close();
