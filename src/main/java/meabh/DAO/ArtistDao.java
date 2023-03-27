@@ -30,7 +30,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
             while (resultSet.next()) {
                 int id = resultSet.getInt("artist_id");
                 String name = resultSet.getString("artist_name");
-                LocalDate date = resultSet.getDate("date").toLocalDate();
+                LocalDate date = resultSet.getDate("formed_date").toLocalDate();
                 String origin = resultSet.getString("origin");
                 String memberString = resultSet.getString("members");
                 List<String> members = Arrays.asList(memberString.split(","));
@@ -73,15 +73,18 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
 
             resultSet = preparedStatement.executeQuery();
 
-            if(id == resultSet.getInt("artist_id")){
-                String name = resultSet.getString("artist_name");
-                LocalDate date = resultSet.getDate("date").toLocalDate();
-                String origin = resultSet.getString("origin");
-                String memberString = resultSet.getString("members");
-                List<String> members = Arrays.asList(memberString.split(","));
+            while (resultSet.next()) {
+                if(id == resultSet.getInt("artist_id")){
+                    String name = resultSet.getString("artist_name");
+                    LocalDate date = resultSet.getDate("formed_date").toLocalDate();
+                    String origin = resultSet.getString("origin");
+                    String memberString = resultSet.getString("members");
+                    List<String> members = Arrays.asList(memberString.split(","));
 
-                artist = new Artist(id, name, date, origin, members);
+                    artist = new Artist(id, name, date, origin, members);
+                }
             }
+                
         } catch (SQLException e) {
             throw new DaoException("findArtistByIdSet()" + e.getMessage());
         } finally {
