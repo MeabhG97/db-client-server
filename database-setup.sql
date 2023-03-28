@@ -33,7 +33,7 @@ CREATE TABLE songs (
 
 INSERT INTO artists (artist_name, formed_date, origin, members)
 VALUES 
-  ('Nightwish', '1996-07-06', 'Kitee,Finland', 'Tuomas Holopainen,Emppu Vuorinen,Jukka Nevalainen,Tarja Turunen,Marco Hietala,Floor Jansen'),
+  ('Nightwish', '1996-07-06', 'Kitee,Finland', 'Tuomas Holopainen,Emppu Vuorinen,Jukka Nevalainen,Marco Hietala,Floor Jansen'),
   ('Beast in Black', '2015-12-08', 'Helsinki,Finland', 'Anton Kabanen,Yannis Papadopoulos,Kasperi Heikkinen,Mate Molnar,Atte Palokangas'),
   ('Apocalyptica', '1993-09-17', 'Helsinki,Finland', 'Eicca Toppinen,Perttu Kivilaakso,Paavo Lötjönen,Mikko Sirén');
 
