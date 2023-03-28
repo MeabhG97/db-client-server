@@ -115,6 +115,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
             String query = "DELETE FROM artists WHERE artist_id = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("deleteArtistByIdSet()" + e.getMessage());
         } finally {
@@ -143,6 +144,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
             preparedStatement.setDate(2, Date.valueOf(artist.getFormation()));
             preparedStatement.setString(3, artist.getOrigin());
             preparedStatement.setString(4, artist.getMembersAsString());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("addArtistSet()" + e.getMessage());
         } finally {

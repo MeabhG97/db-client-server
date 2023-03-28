@@ -43,6 +43,7 @@ public class App {
                     artistDaoInterface.deleteArtistById(id);
                 }
                 case 4 -> {
+                    menu.nextLine();
                     System.out.println("Enter name");
                     String name = menu.nextLine();
                     System.out.println("Enter date formed");
@@ -62,8 +63,11 @@ public class App {
                                 members.add(mem);
                             }
                             else{
-                                members.add("," + mem);
+                                String m = mem;
+                                System.out.println(m);
+                                members.add(m);
                             }
+                            System.out.println(members);
                         }
                         else{
                             enterMembers = false;
@@ -76,5 +80,6 @@ public class App {
         }catch(DaoException e){
             System.out.println(e.getMessage());
         }
+        menu.close();
     }
 }
