@@ -12,8 +12,30 @@ import java.time.LocalDate;
 
 import meabh.DTO.Artist;
 import meabh.Exceptions.DaoException;
+import meabh.Cache.ArtistCache;
 
 public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
+    private ArtistCache cache;
+
+    public ArtistDao() throws DaoException{
+        cache = new ArtistCache();
+        initialiseCache();
+    }
+
+    private void initialiseCache() throws DaoException{
+        List<Artist> artists = findAllArtists();
+        for (Artist artist : artists) {
+            cache.addId(artist.getId());
+        }
+    }
+
+    private boolean isIdInCache(int id){
+        if(cache.isIdInDatabase(id)){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public List<Artist> findAllArtists() throws DaoException {
         Connection connection = null;
@@ -21,7 +43,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         ResultSet resultSet = null;
         List<Artist> artistList = new ArrayList<>();
 
-        try {
+        try{
             connection = this.getConnection();
             String query = "SELECT * FROM artists";
             preparedStatement = connection.prepareStatement(query);
