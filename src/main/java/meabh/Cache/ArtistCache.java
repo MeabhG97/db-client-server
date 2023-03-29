@@ -28,4 +28,9 @@ public class ArtistCache {
             cache.remove(id);
         }
     }
+
+    @Override
+    public String toString() {
+        return "ArtistCache [cache=" + cache + "]";
+    }
 }
