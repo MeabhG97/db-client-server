@@ -10,5 +10,4 @@ public class ArtistSortByFormedDate implements Comparator<Artist> {
     public int compare(Artist o1, Artist o2) {
         return o1.getFormation().compareTo(o2.getFormation());
     }
-
 }
