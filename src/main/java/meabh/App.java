@@ -16,7 +16,7 @@ public class App {
     }
 
     public static void DaoMenu(){
-        Scanner menu = new Scanner(System.in);
+        try(Scanner menu = new Scanner(System.in)){
         ArtistDaoInterface artistDaoInterface = new ArtistDao();
 
         System.out.println("1. Find All Artists");
@@ -25,7 +25,6 @@ public class App {
         System.out.println("4. Add new Artist");
 
         int opt = menu.nextInt();
-        try{
             switch(opt){
                 case 1 -> {
                     List<Artist> artists =  artistDaoInterface.findAllArtists();
@@ -80,6 +79,5 @@ public class App {
         }catch(DaoException e){
             System.out.println(e.getMessage());
         }
-        menu.close();
     }
 }
