@@ -38,17 +38,13 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
 
     @Override
     public List<Artist> findAllArtists() throws DaoException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         List<Artist> artistList = new ArrayList<>();
+        String query = "SELECT * FROM artists";
 
-        try{
-            connection = this.getConnection();
-            String query = "SELECT * FROM artists";
-            preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = this.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);){
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("artist_id");
                 String name = resultSet.getString("artist_name");
@@ -62,38 +58,20 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
             }
         } catch (SQLException e) {
             throw new DaoException("findAllArtistSet()" + e.getMessage());
-        } finally {
-            try{
-                if(resultSet != null){
-                    resultSet.close();
-                }
-                if(preparedStatement != null){
-                    preparedStatement.close();
-                }
-                if(connection != null){
-                    freeConnection(connection);
-                }
-            }catch(SQLException e){
-                throw new DaoException("findAllArtists() " + e.getMessage());
-            }
         }
 
         return artistList;
     }
 
     public Artist findArtistById(int id) throws DaoException{
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         Artist artist = null;
+        String query = "SELECT * FROM artists WHERE artist_id = ?";
 
-        try {
-            connection = this.getConnection();
-            String query = "SELECT * FROM artists WHERE artist_id = ?";
-            preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = this.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);){
             preparedStatement.setInt (1, id);
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 if(id == resultSet.getInt("artist_id")){
@@ -109,59 +87,29 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
                 
         } catch (SQLException e) {
             throw new DaoException("findArtistByIdSet()" + e.getMessage());
-        } finally {
-            try{
-                if(resultSet != null){
-                    resultSet.close();
-                }
-                if(preparedStatement != null){
-                    preparedStatement.close();
-                }
-                if(connection != null){
-                    freeConnection(connection);
-                }
-            }catch(SQLException e){
-                throw new DaoException("findArtistById() " + e.getMessage());
-            }
         }
 
         return artist;
     }
 
     public void deleteArtistById(int id) throws DaoException{
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        String query = "DELETE FROM artists WHERE artist_id = ?";
 
-        try {
-            connection = this.getConnection();
-            String query = "DELETE FROM artists WHERE artist_id = ?";
-            preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = this.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);){
+
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("deleteArtistByIdSet()" + e.getMessage());
-        } finally {
-            try{
-                if(preparedStatement != null){
-                    preparedStatement.close();
-                }
-                if(connection != null){
-                    freeConnection(connection);
-                }
-            }catch(SQLException e){
-                throw new DaoException("deleteArtistById() " + e.getMessage());
-            }
         }
     }
 
     public void addArtist(Artist artist) throws DaoException{
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        String query = "INSERT INTO artists (artist_name, formed_date, origin, members) VALUES (?, ?, ?, ?)";
 
-        try {
-            connection = this.getConnection();
-            String query = "INSERT INTO artists (artist_name, formed_date, origin, members) VALUES (?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = this.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);){
             preparedStatement.setString(1, artist.getName());
             preparedStatement.setDate(2, Date.valueOf(artist.getFormation()));
             preparedStatement.setString(3, artist.getOrigin());
@@ -169,17 +117,6 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("addArtistSet()" + e.getMessage());
-        } finally {
-            try{
-                if(preparedStatement != null){
-                    preparedStatement.close();
-                }
-                if(connection != null){
-                    freeConnection(connection);
-                }
-            }catch(SQLException e){
-                throw new DaoException("addArtist() " + e.getMessage());
-            }
         }
     }
 }
