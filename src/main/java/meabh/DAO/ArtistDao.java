@@ -41,6 +41,11 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         List<Artist> artistList = new ArrayList<>();
         String query = "SELECT * FROM artists";
 
+        //returns empty list if database is empty
+        if(cache.isEmpty()){
+            return List.of();
+        }
+
         try(Connection connection = this.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);){
 
@@ -66,6 +71,10 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
     public Artist findArtistById(int id) throws DaoException{
         Artist artist = null;
         String query = "SELECT * FROM artists WHERE artist_id = ?";
+
+        if(!isIdInCache(id)){
+            throw new DaoException("Id is not is database");
+        }
 
         try(Connection connection = this.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);){
@@ -94,6 +103,10 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
 
     public void deleteArtistById(int id) throws DaoException{
         String query = "DELETE FROM artists WHERE artist_id = ?";
+
+        if(!isIdInCache(id)){
+            throw new DaoException("Id is not is database");
+        }
 
         try(Connection connection = this.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);){
