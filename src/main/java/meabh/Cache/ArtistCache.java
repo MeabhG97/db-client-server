@@ -17,6 +17,10 @@ public class ArtistCache {
         return false;
     }
 
+    public boolean isEmpty(){
+        return cache.isEmpty();
+    }
+
     public void addId(int id){
         if(!isIdInDatabase(id)){
             cache.add(id);
