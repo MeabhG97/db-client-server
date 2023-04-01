@@ -142,7 +142,6 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         List<Artist> artists = new ArrayList<>();
 
         if(cache.isEmpty()){
-            System.out.println("Empty");
             return List.of();
         }
 
