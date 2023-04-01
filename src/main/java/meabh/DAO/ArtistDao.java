@@ -1,6 +1,7 @@
 package meabh.DAO;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Connection;
@@ -13,9 +14,11 @@ import java.time.LocalDate;
 import meabh.DTO.Artist;
 import meabh.Exceptions.DaoException;
 import meabh.Cache.ArtistCache;
+import meabh.Comparators.ArtistSortByFormedDate;
 
 public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
     private ArtistCache cache;
+    private boolean cacheInitialised = false;
 
     public ArtistDao() throws DaoException{
         cache = new ArtistCache();
@@ -27,6 +30,8 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         for (Artist artist : artists) {
             cache.addId(artist.getId());
         }
+        cacheInitialised = true;
+        System.out.println(cache.toString());
     }
 
     private boolean isIdInCache(int id){
@@ -42,7 +47,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         String query = "SELECT * FROM artists";
 
         //returns empty list if database is empty
-        if(cache.isEmpty()){
+        if(cache.isEmpty() && cacheInitialised){
             return List.of();
         }
 
@@ -131,5 +136,26 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         } catch (SQLException e) {
             throw new DaoException("addArtistSet()" + e.getMessage());
         }
+    }
+
+    public List<Artist> findArtistsFormedDate(LocalDate date) throws DaoException{
+        List<Artist> artists = new ArrayList<>();
+
+        if(cache.isEmpty()){
+            System.out.println("Empty");
+            return List.of();
+        }
+
+        try{
+            artists = findAllArtists();
+            ArtistSortByFormedDate comparator = new ArtistSortByFormedDate();
+            Predicate<Artist> condition = artist -> (comparator.compareDate(artist, date) < 0);
+            artists.removeIf(condition);
+        }
+        catch(DaoException e){
+            System.out.println("DAO Exception filter " + e.getMessage());
+        }
+
+        return artists;
     }
 }

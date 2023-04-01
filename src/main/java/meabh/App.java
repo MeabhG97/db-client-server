@@ -23,6 +23,7 @@ public class App {
         System.out.println("2. Find Artist By Id");
         System.out.println("3. Delete Artist By Id");
         System.out.println("4. Add new Artist");
+        System.out.println("5. Find Artists fromed later than date");
 
         int opt = menu.nextInt();
             switch(opt){
@@ -74,6 +75,13 @@ public class App {
                     }
                     Artist artist = new Artist(name, date, origin, members);
                     artistDaoInterface.addArtist(artist);
+                }
+                case 5 -> {
+                    menu.nextLine();
+                    System.out.println("Enter date");
+                    LocalDate date = LocalDate.parse(menu.nextLine());
+                    List<Artist> artists = artistDaoInterface.findArtistsFormedDate(date);
+                    System.out.println(artists.toString());
                 }
             }
         }catch(DaoException e){
