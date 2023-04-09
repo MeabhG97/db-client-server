@@ -24,6 +24,8 @@ public class App {
         System.out.println("3. Delete Artist By Id");
         System.out.println("4. Add new Artist");
         System.out.println("5. Find Artists fromed later than date");
+        System.out.println("6. Find All Artists Json");
+        System.out.println("7. Find Artist by Id Json");
 
         int opt = menu.nextInt();
             switch(opt){
@@ -82,6 +84,14 @@ public class App {
                     LocalDate date = LocalDate.parse(menu.nextLine());
                     List<Artist> artists = artistDaoInterface.findArtistsFormedDate(date);
                     System.out.println(artists.toString());
+                }
+                case 6 -> {
+
+                }
+                case 7 -> {
+                    System.out.println("Enter Id to search");
+                    int id = menu.nextInt();
+                    System.out.println(artistDaoInterface.findArtistByIdJson(id));
                 }
             }
         }catch(DaoException e){

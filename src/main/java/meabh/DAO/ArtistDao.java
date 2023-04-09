@@ -2,6 +2,10 @@ package meabh.DAO;
 
 import java.util.List;
 import java.util.function.Predicate;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Connection;
@@ -15,10 +19,12 @@ import meabh.DTO.Artist;
 import meabh.Exceptions.DaoException;
 import meabh.Cache.ArtistCache;
 import meabh.Comparators.ArtistSortByFormedDate;
+import meabh.GsonTypeAdapter.LocalDateAdapter;
 
 public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
     private ArtistCache cache;
     private boolean cacheInitialised = false;
+    private static Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
 
     public ArtistDao() throws DaoException{
         cache = new ArtistCache();
@@ -156,5 +162,24 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         }
 
         return artists;
+    }
+
+    private String artistToJSON(Artist artist){
+        return gson.toJson(artist, Artist.class);
+    }
+
+    public String findArtistByIdJson(int id) throws DaoException{
+        if(!isIdInCache(id)){
+            throw new DaoException("Id is not is database");
+        }
+
+        String res = "";
+        try{
+            Artist artist = findArtistById(id);
+            res = artistToJSON(artist);
+        }catch(DaoException e){
+            System.out.println(e.getMessage());
+        }
+        return res;
     }
 }
