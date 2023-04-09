@@ -164,8 +164,28 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         return artists;
     }
 
+    private String artistListToJSON(List<Artist> artists){
+        return gson.toJson(artists);
+    }
+
     private String artistToJSON(Artist artist){
-        return gson.toJson(artist, Artist.class);
+        return gson.toJson(artist);
+    }
+
+    public String findAllArtistsJson() throws DaoException {
+        if(cache.isEmpty()){
+            throw new DaoException("Database Empty");
+        }
+
+        String res = "";
+        try{
+            List<Artist> artists = findAllArtists();
+            res = artistListToJSON(artists);
+        } catch (DaoException e){
+            System.out.println(e.getMessage());
+        }
+
+        return res;
     }
 
     public String findArtistByIdJson(int id) throws DaoException{

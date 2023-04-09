@@ -86,7 +86,7 @@ public class App {
                     System.out.println(artists.toString());
                 }
                 case 6 -> {
-
+                    System.out.println(artistDaoInterface.findAllArtistsJson());
                 }
                 case 7 -> {
                     System.out.println("Enter Id to search");
