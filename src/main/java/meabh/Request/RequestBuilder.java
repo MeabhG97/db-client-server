@@ -1,8 +1,7 @@
-package meabh.Client;
+package meabh.Request;
 
 import com.google.gson.Gson;
 
-import meabh.Request.Request;
 import meabh.Request.Request.RequestType;
 import meabh.DTO.Artist;
 
