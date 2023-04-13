@@ -14,4 +14,5 @@ public interface ArtistDaoInterface {
     public List<Artist> findArtistsFormedDate(LocalDate date) throws DaoException;
     public String findAllArtistsJson() throws DaoException;
     public String findArtistByIdJson(int id) throws DaoException;
+    public String findLastAddedArtistJson() throws DaoException;
 }

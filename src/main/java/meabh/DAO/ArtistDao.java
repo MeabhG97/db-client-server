@@ -202,4 +202,34 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         }
         return res;
     }
+
+    public String findLastAddedArtistJson() throws DaoException {
+        if(cache.isEmpty()){
+            throw new DaoException("Database Empty");
+        }
+
+        Artist artist = null;
+        String query = "SELECT * FROM artists ORDER BY artist_id DESC LIMIT 1";
+
+        try(Connection connection = this.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);){
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("artist_id");
+                String name = resultSet.getString("artist_name");
+                LocalDate date = resultSet.getDate("formed_date").toLocalDate();
+                String origin = resultSet.getString("origin");
+                String memberString = resultSet.getString("members");
+                List<String> members = Arrays.asList(memberString.split(","));
+
+                artist = new Artist(id, name, date, origin, members);
+            }
+
+            return gson.toJson(artist);
+        } catch(SQLException e){
+            throw new DaoException(e.getMessage());
+        }
+    }
 }
