@@ -1,9 +1,6 @@
 package meabh.Request;
 
 public class Request {
-    public enum RequestType {
-        GET, POST, PUT, DELETE;
-    }
     
     private RequestType type;
     private String body;
