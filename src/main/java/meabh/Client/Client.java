@@ -14,8 +14,7 @@ public class Client {
 
     public void start(){
         Menu menu = new Menu();
-        try{
-            Socket socket = new Socket("localhost", 8080);
+        try(Socket socket = new Socket("localhost", 8080)){
 
             menu.displayOptions();
             String request = menu.enterInput();

@@ -7,6 +7,7 @@ import java.lang.IndexOutOfBoundsException;
 import java.time.LocalDate;
 
 import meabh.DTO.Artist;
+import meabh.Request.RequestBuilder;
 
 public class Menu {
     private static Scanner inputScanner = new Scanner(System.in);
