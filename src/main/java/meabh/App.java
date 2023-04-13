@@ -10,9 +10,21 @@ import meabh.DAO.ArtistDaoInterface;
 import meabh.DTO.Artist;
 import meabh.Exceptions.DaoException;
 
+import meabh.Request.RequestHandler;
+import meabh.Request.RequestBuilder;
+
 public class App {
     public static void main(String[] args) {
-        DaoMenu();
+        //DaoMenu();
+        RequestMenu();
+    }
+
+    public static void RequestMenu(){
+        System.out.println(RequestBuilder.findAllArtists());
+        System.out.println(RequestBuilder.findArtist(2));
+        System.out.println(RequestBuilder.deleteArtist(1));
+        String requestJson = RequestBuilder.findAllArtists();
+        RequestHandler.handleRequest(requestJson);
     }
 
     public static void DaoMenu(){
