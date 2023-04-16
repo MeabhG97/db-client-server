@@ -37,7 +37,6 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
             cache.addId(artist.getId());
         }
         cacheInitialised = true;
-        System.out.println(cache.toString());
     }
 
     private boolean isIdInCache(int id){
