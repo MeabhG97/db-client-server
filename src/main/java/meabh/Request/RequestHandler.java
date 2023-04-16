@@ -37,7 +37,7 @@ public class RequestHandler {
         return response;
     }
 
-    public static String handleGet(String requestBody){
+    private static String handleGet(String requestBody){
         try{
             ArtistDaoInterface artistDao = new ArtistDao();
             if(requestBody.length() > 0){
@@ -51,7 +51,7 @@ public class RequestHandler {
         }
     }
 
-    public static String handlePost(String requestBody){
+    private static String handlePost(String requestBody){
         Artist artist = gson.fromJson(requestBody, Artist.class);
         try{
             ArtistDaoInterface artistDao = new ArtistDao();
@@ -62,7 +62,7 @@ public class RequestHandler {
         }
     }
 
-    public static String handleDelete(String requestBody){
+    private static String handleDelete(String requestBody){
         try{
             ArtistDaoInterface artistDao = new ArtistDao();
             artistDao.deleteArtistById(gson.fromJson(requestBody, Integer.class));
