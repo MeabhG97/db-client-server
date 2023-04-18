@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.lang.IndexOutOfBoundsException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import meabh.DTO.Artist;
 import meabh.Request.RequestBuilder;
@@ -69,30 +70,25 @@ public class Menu {
 
     private String addArtist(){
         inputScanner.nextLine();
+
         System.out.println("Enter name");
         String name = inputScanner.nextLine();
-        System.out.println("Enter date formed");
-        String dateString = inputScanner.nextLine();
-        LocalDate date = LocalDate.parse(dateString);
+
+        LocalDate date = dateInput();
+
         System.out.println("Enter Orgin");
         String origin = inputScanner.nextLine();
+
         boolean enterMembers = true;
         int i = 1;
         ArrayList<String> members = new ArrayList<>();
         while(enterMembers){
-            System.out.println("Enter memeber " + i);
+            System.out.println("Enter memeber " + i + ", Or empty input to stop:");
             i++;
+
             String mem = inputScanner.nextLine();
             if(mem.length() > 0){
-                if(members.isEmpty()){
-                    members.add(mem);
-                }
-                else{
-                    String m = mem;
-                    System.out.println(m);
-                    members.add(m);
-                }
-                System.out.println(members);
+                members.add(mem);
             }
             else{
                 enterMembers = false;
@@ -101,6 +97,23 @@ public class Menu {
         Artist artist = new Artist(name, date, origin, members);
 
         return RequestBuilder.addArtist(artist);
+    }
+
+    private LocalDate dateInput(){
+        boolean validDate = false;
+        LocalDate date = null;
+
+        while(!validDate){
+            System.out.println("Enter date formed (YYYY-MM-DD)");
+            String dateString = inputScanner.nextLine();
+            try{
+                date = LocalDate.parse(dateString);
+                validDate = true;
+            } catch(DateTimeParseException e){
+                System.out.println("Invalid Date");
+            }
+        }
+        return date;
     }
 
     private String deleteArtist(){
