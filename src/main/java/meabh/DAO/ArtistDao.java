@@ -111,7 +111,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         return artist;
     }
 
-    public void deleteArtistById(int id) throws DaoException{
+    public synchronized void deleteArtistById(int id) throws DaoException{
         String query = "DELETE FROM artists WHERE artist_id = ?";
 
         if(!isIdInCache(id)){
@@ -128,7 +128,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         }
     }
 
-    public void addArtist(Artist artist) throws DaoException{
+    public synchronized void addArtist(Artist artist) throws DaoException{
         String query = "INSERT INTO artists (artist_name, formed_date, origin, members) VALUES (?, ?, ?, ?)";
 
         try(Connection connection = this.getConnection();
