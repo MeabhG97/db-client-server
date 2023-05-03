@@ -76,4 +76,3 @@ VALUES
   ('Quutamo', 10, 207),
   ('Bittersweet', 11, 298),
   ('I Don''t Care', 11, 237);
-
