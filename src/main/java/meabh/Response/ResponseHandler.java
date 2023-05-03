@@ -7,7 +7,7 @@ public class ResponseHandler {
     
     public static void handleResponse(String responseJson){
         Response response = gson.fromJson(responseJson, Response.class);
-        System.out.println(response.getCode());
+        System.out.println("Response Code:" + response.getCode());
         System.out.println(response.getBody());
     }
 }

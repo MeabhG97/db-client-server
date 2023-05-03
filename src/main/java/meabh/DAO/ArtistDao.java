@@ -115,7 +115,7 @@ public class ArtistDao extends MySqlDao implements ArtistDaoInterface {
         String query = "DELETE FROM artists WHERE artist_id = ?";
 
         if(!isIdInCache(id)){
-            throw new DaoException("Id is not is database");
+            throw new DaoException("Id is not in database");
         }
 
         try(Connection connection = this.getConnection();

@@ -21,14 +21,14 @@ public class Client {
             OutputStream outputStream = socket.getOutputStream();
             PrintWriter outputStreamWriter = new PrintWriter(outputStream, true);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()))){
+            
+                menu.displayOptions();
+                String request = menu.enterInput();
+                outputStreamWriter.write(request + "\n");
+                outputStreamWriter.flush();
 
-            menu.displayOptions();
-            String request = menu.enterInput();
-            outputStreamWriter.write(request + "\n");
-            outputStreamWriter.flush();
-
-            String response = inputStream.readLine();
-            ResponseHandler.handleResponse(response);
+                String response = inputStream.readLine();
+                ResponseHandler.handleResponse(response);
         } catch(IOException e){
             System.out.println("IOExeption: " + e.getMessage());
         }

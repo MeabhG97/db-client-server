@@ -15,8 +15,8 @@ import meabh.Request.RequestBuilder;
 
 public class App {
     public static void main(String[] args) {
-        //DaoMenu();
-        RequestMenu();
+        DaoMenu();
+        //RequestMenu();
     }
 
     public static void RequestMenu(){
@@ -98,7 +98,8 @@ public class App {
                     System.out.println(artists.toString());
                 }
                 case 6 -> {
-                    System.out.println(artistDaoInterface.findAllArtistsJson());
+                    String artistsJson = artistDaoInterface.findAllArtistsJson();
+                    
                 }
                 case 7 -> {
                     System.out.println("Enter Id to search");
