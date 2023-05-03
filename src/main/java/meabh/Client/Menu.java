@@ -30,30 +30,36 @@ public class Menu {
 
     public String enterInput(){
         String requestStr = "";
-        System.out.println("Enter number corresponding to chosen option:");
-        try{
-            int selection = inputScanner.nextInt() - 1;
-            switch(selection) {
-                case 0 -> {
-                    requestStr = findArtist();
+        boolean validOpt = false;
+        while(!validOpt){
+            System.out.println("Enter number corresponding to chosen option:");
+            try{
+                int selection = inputScanner.nextInt() - 1;
+                switch(selection) {
+                    case 0 -> {
+                        requestStr = findArtist();
+                        validOpt = true;
+                    }
+                    case 1 -> {
+                        requestStr = findAllArtists();
+                        validOpt = true;
+                    }
+                    case 2 -> {
+                        requestStr = addArtist();
+                        validOpt = true;
+                    }
+                    case 3 -> {
+                        requestStr = deleteArtist();
+                        validOpt = true;
+                    }
                 }
-                case 1 -> {
-                    requestStr = findAllArtists();
-                }
-                case 2 -> {
-                    requestStr = addArtist();
-                }
-                case 3 -> {
-                    requestStr = deleteArtist();
-                }
+            } catch(InputMismatchException e) {
+                System.out.println("Error: input was not a number");
+                inputScanner.nextLine();
+            } catch(IndexOutOfBoundsException e){
+                System.out.println("Error: that option doesn't exists");
             }
-        } catch(InputMismatchException e) {
-            System.out.println("Error: input was not a number");
-            inputScanner.nextLine();
-        } catch(IndexOutOfBoundsException e){
-            System.out.println("Error: that option doesn't exists");
         }
-
         return requestStr;
     }
 
